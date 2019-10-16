@@ -1,14 +1,22 @@
-class Recipes {
-	constructor() {
-		this.recipes = [
-			{ title: 1, ingredients: ["apple", "banana", "pear"] },
-			{ title: 2, ingredients: ["poppy", "lime"] }
-		];
-	}
+const mongoose = require("mongoose");
 
-	getAllRecipes() {
-		return this.recipes;
-	}
-}
+const recipeSchema = new mongoose.Schema({
+	id: Number,
+	title: String,
+	ingredients: Array,
+	instructions: Array,
+	catergories: {
+		type: [
+			{
+				type: String,
+				lowercase: true
+			}
+		]
+	},
+	time: String,
+	serving: String
+});
 
-module.exports = new Recipes();
+const Recipe = mongoose.model("Recipe", recipeSchema);
+
+module.exports = Recipe;
