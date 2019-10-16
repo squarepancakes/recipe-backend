@@ -2,14 +2,13 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 
-app.use(express());
+if (process.env.NODE_ENV !== "test") {
+	require("./db");
+}
+
+app.use(express.json());
 
 app.use(cookieParser());
-
-// const middleware = (req, res, next) => {
-// 	next();
-// };
-// app.use(middleware)
 
 const index = require("./routes/index");
 app.use("/", index);
