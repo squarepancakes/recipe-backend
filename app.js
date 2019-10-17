@@ -16,4 +16,7 @@ app.use("/", index);
 const recipes = require("./routes/recipes");
 app.use("/recipes", recipes);
 
+const users = require("./routes/users");
+app.use("/users", users);
+
 module.exports = app;

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/Recipe");
+const User = require("../models/User");
 
 router.get("/", async (req, res, next) => {
 	try {
@@ -10,7 +11,7 @@ router.get("/", async (req, res, next) => {
 		const hasMultipleCategories =
 			query.catergories &&
 			Array.isArray(query.catergories) &&
-			query.catergories.length > 1;a
+			query.catergories.length > 1;
 
 		if (hasMultipleCategories) {
 			query = { catergories: { $all: [...query.catergories] } };
@@ -43,7 +44,12 @@ router.post("/new", async (req, res, next) => {
 		const newRecipe = new Recipe(newRecipeDetails);
 		await Recipe.init();
 		const savedRecipe = await newRecipe.save();
-		res.send(savedRecipe);
+		const recipeId = savedRecipe._id;
+		const userId = newRecipeDetails.user;
+		const user = await User.findById(userId);
+		user.recipes.push(recipeId);
+		const savedUser = await user.save();
+		res.send(savedUser);
 	} catch (err) {
 		console.error("Cannot save new recipe");
 		next(err);
