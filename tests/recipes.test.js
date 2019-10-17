@@ -10,8 +10,8 @@ const {
 	someOtherRecipe,
 	recipesTestData,
 	recipes,
-	dessertCatergory,
-	breadCatergory
+	dessertCategory,
+	breadCategory
 } = require("./recipesTestData");
 
 describe("Recipes", () => {
@@ -76,46 +76,46 @@ describe("Recipes", () => {
 			expect(actualRecipe).toMatchObject(expectedRecipe);
 		});
 
-		describe("should be able to query via catergories", () => {
-			it("should only receive one recipe for /recipes?catergories=bread", async () => {
+		describe("should be able to query via categories", () => {
+			it("should only receive one recipe for /recipes?categories=bread", async () => {
 				const { body: allRecipes } = await request(app)
 					.get("/recipes")
-					.query({ catergories: "bread" })
+					.query({ categories: "bread" })
 					.expect(200);
 
 				expect(allRecipes).toHaveLength(1);
 
-				expect(allRecipes[0].catergories).toEqual(
+				expect(allRecipes[0].categories).toEqual(
 					expect.arrayContaining(["bread"])
 				);
 			});
 
-			it("should receive recipes with desserts for /recipes?catergories=dessert", async () => {
+			it("should receive recipes with desserts for /recipes?categories=dessert", async () => {
 				const { body: allRecipes } = await request(app)
 					.get("/recipes")
-					.query({ catergories: "dessert" })
+					.query({ categories: "dessert" })
 					.expect(200);
 
 				expect(allRecipes).toHaveLength(2);
 
-				expect(allRecipes[0].catergories).toEqual(
+				expect(allRecipes[0].categories).toEqual(
 					expect.arrayContaining(["dessert"])
 				);
 
-				expect(allRecipes[1].catergories).toEqual(
+				expect(allRecipes[1].categories).toEqual(
 					expect.arrayContaining(["dessert"])
 				);
 			});
 
-			it("should receive 3 recipes for /recipes?catergories[]=dessert&catergories[]=vegetarian", async () => {
+			it("should receive 3 recipes for /recipes?categories[]=dessert&categories[]=vegetarian", async () => {
 				const { body: allRecipes } = await request(app)
 					.get("/recipes")
-					.query({ catergories: ["dessert", "vegetarian"] })
+					.query({ categories: ["dessert", "vegetarian"] })
 					.expect(200);
 
 				expect(allRecipes).toHaveLength(2);
 
-				expect(allRecipes[1].catergories).toEqual(
+				expect(allRecipes[1].categories).toEqual(
 					expect.arrayContaining(["dessert", "vegetarian"])
 				);
 			});

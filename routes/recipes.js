@@ -9,12 +9,12 @@ router.get("/", async (req, res, next) => {
 		let matchedRecipes;
 
 		const hasMultipleCategories =
-			query.catergories &&
-			Array.isArray(query.catergories) &&
-			query.catergories.length > 1;
+			query.categories &&
+			Array.isArray(query.categories) &&
+			query.categories.length > 1;
 
 		if (hasMultipleCategories) {
-			query = { catergories: { $all: [...query.catergories] } };
+			query = { categories: { $all: [...query.categories] } };
 		}
 
 		matchedRecipes = await Recipe.find(query);
@@ -49,6 +49,7 @@ router.post("/new", async (req, res, next) => {
 		const user = await User.findById(userId);
 		user.recipes.push(recipeId);
 		const savedUser = await user.save();
+
 		res.send(savedUser);
 	} catch (err) {
 		console.error("Cannot save new recipe");

@@ -3,7 +3,7 @@ const applePie = {
 	title: "apple pie",
 	ingredients: ["apple", "butter"],
 	instructions: ["pray"],
-	catergories: ["vegetarian", "dessert"]
+	categories: ["vegetarian", "dessert"]
 };
 
 const bananaBread = {
@@ -11,7 +11,7 @@ const bananaBread = {
 	title: "banana bread",
 	ingredients: ["banana", "flour"],
 	instructions: ["pray"],
-	catergories: ["vegetarian", "bread"]
+	categories: ["vegetarian", "bread"]
 };
 
 const poachedPear = {
@@ -19,7 +19,7 @@ const poachedPear = {
 	title: "poached pear",
 	ingredients: ["pear", "sugar"],
 	instructions: ["pray"],
-	catergories: ["vegetarian", "dessert"]
+	categories: ["vegetarian", "dessert"]
 };
 
 const someOtherRecipe = {
@@ -27,7 +27,7 @@ const someOtherRecipe = {
 	title: "some other recipe",
 	ingredients: ["pear", "sugar"],
 	instructions: ["pray"],
-	catergories: ["vegetarian", "dessert"]
+	categories: ["vegetarian", "dessert"]
 };
 
 const recipesTestData = [applePie, bananaBread, poachedPear];
