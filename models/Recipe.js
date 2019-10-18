@@ -7,8 +7,7 @@ const recipeSchema = new mongoose.Schema({
 	categories: {
 		type: [
 			{
-				type: String,
-				lowercase: true
+				type: String
 			}
 		]
 	},
