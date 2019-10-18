@@ -1,5 +1,5 @@
 const applePie = {
-	id: 1,
+
 	title: "apple pie",
 	ingredients: ["apple", "butter"],
 	instructions: ["pray"],
@@ -7,7 +7,7 @@ const applePie = {
 };
 
 const bananaBread = {
-	id: 2,
+
 	title: "banana bread",
 	ingredients: ["banana", "flour"],
 	instructions: ["pray"],
@@ -15,7 +15,7 @@ const bananaBread = {
 };
 
 const poachedPear = {
-	id: 3,
+	
 	title: "poached pear",
 	ingredients: ["pear", "sugar"],
 	instructions: ["pray"],
@@ -23,7 +23,6 @@ const poachedPear = {
 };
 
 const someOtherRecipe = {
-	id: 4,
 	title: "some other recipe",
 	ingredients: ["pear", "sugar"],
 	instructions: ["pray"],
