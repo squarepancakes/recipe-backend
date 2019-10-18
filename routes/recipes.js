@@ -40,8 +40,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/new", async (req, res, next) => {
 	try {
-		const newRecipeDetails = req.body;
-		const newRecipe = new Recipe(newRecipeDetails);
+		const newRecipeDetails = await req.body;
+		const newRecipe = await new Recipe(newRecipeDetails);
 		await Recipe.init();
 		const savedRecipe = await newRecipe.save();
 		const recipeId = savedRecipe._id;
