@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const token = "Hsf979EUHFIUWN123erfwsw3eruf00j1QJKhdg537GS";
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 router.get("/", async (req, res, next) => {
 	try {
-		const usersList = await User.find(); //.populate("recipes");
+		const usersList = await User.find();
 		res.send(usersList);
 	} catch (err) {
 		next(err);
+	}
+});
+
+router.get("/me", async (req, res) => {
+	try {
+		const decoded = jwt.verify(req.cookies.token, process.env.JWT_KEY);
+		res.json({ username: decoded.name, id: decoded._id });
+	} catch (err) {
+		res.sendStatus(401);
 	}
 });
 
@@ -40,10 +50,16 @@ router.post("/login", async (req, res, next) => {
 	try {
 		const { username, password } = req.body;
 		const user = await User.findOne({ username });
-		console.log(user);
-		if (password !== user.password) {
-			throw new Error("Login failed");
+		if (!user) {
+			throw new Error("User does not exist! Please register!");
 		}
+		const checkPassword = await bcrypt.compare(password, user.password);
+		if (!checkPassword) {
+			throw new Error("Wrong password");
+		}
+		const payload = { name: user.username, id: user._id };
+
+		const token = jwt.sign(payload, process.env.JWT_KEY);
 
 		res.cookie("token", token);
 		res.send(user);
@@ -59,23 +75,27 @@ router.post("/logout", async (req, res) => {
 	res.clearCookie("token").send("You are now logged out!");
 });
 
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:name", async (req, res, next) => {
 	try {
-		const userId = req.params.id;
+		const user = req.params.name;
 		const newUserInfo = req.body;
-		const updateUserInfo = await User.findByIdAndUpdate(userId, newUserInfo, {
-			new: true
-		});
+		const updateUserInfo = await User.findOneAndUpdate(
+			{ username: user },
+			newUserInfo,
+			{
+				new: true
+			}
+		);
 		res.send(`Updated ${updateUserInfo}`);
 	} catch (err) {
 		next(err);
 	}
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:name", async (req, res, next) => {
 	try {
-		const userId = req.params.id;
-		await User.findByIdAndDelete(userId);
+		const user = req.params.name;
+		await User.findOneAndDelete({ username: user });
 		res.send("User deleted");
 	} catch (err) {
 		next(err);
