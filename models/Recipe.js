@@ -12,7 +12,7 @@ const recipeSchema = new mongoose.Schema({
 		]
 	},
 	time: String,
-	serving: String,
+	servings: String,
 	user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
