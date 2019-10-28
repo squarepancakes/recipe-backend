@@ -53,6 +53,7 @@ router.post("/login", async (req, res, next) => {
 		if (!user) {
 			throw new Error("User does not exist! Please register!");
 		}
+
 		const checkPassword = await bcrypt.compare(password, user.password);
 		if (!checkPassword) {
 			throw new Error("Wrong password");

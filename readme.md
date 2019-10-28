@@ -15,3 +15,9 @@ npm install mongoose express
 ```
 npm install eslint eslint-plugin-react jest nodemon supertest --save-dev
 ```
+
+## Run App
+
+```
+npm run start:dev
+```
