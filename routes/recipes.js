@@ -75,8 +75,9 @@ router.patch("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
 	try {
 		const recipeId = req.params.id;
-		await Recipe.findByIdAndDelete(recipeId);
-		const allRecipes = await Recipe.find();
+		const recipeToBeDeleted = await Recipe.findByIdAndDelete(recipeId);
+		const userId = recipeToBeDeleted.user;
+		const allRecipes = await Recipe.find({user: userId});
 		res.send(allRecipes);
 	} catch (err) {
 		next(err);
