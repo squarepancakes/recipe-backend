@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 let dbURL;
 
-// if(process.env.NODE_ENV === "development") {
-// 	const dbName = "recipes-db";
-// 	dbURL = `mongodb://localhost/${dbName}`;
-// }
+if(process.env.NODE_ENV === "development") {
+	const dbName = "recipes-db";
+	dbURL = `mongodb://localhost/${dbName}`;
+}
 
-// if(process.env.NODE_ENV === "production") {
+if(process.env.NODE_ENV === "production") {
 	dbURL = process.env.MONGO_URI;
-// }
+}
 
 
 mongoose.set("useNewUrlParser", true);
