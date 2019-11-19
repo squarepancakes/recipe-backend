@@ -15,7 +15,7 @@ const corsOptions = {
 		"http://localhost:4000",
 		"https://app-etizer.netlify.com/",
 		"https://app-etizer.herokuapp.com/",
-		"https://app-etizer.netlify.com/signup"
+		"http://app-etizer.netlify.com/"
 	]
 };
 
