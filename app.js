@@ -10,7 +10,12 @@ if (process.env.NODE_ENV !== "test") {
 const corsOptions = {
 	credentials: true,
 	allowedHeaders: "content-type",
-	origin: "http://localhost:3000"
+	origin: [
+		"http://localhost:3000",
+		"http://localhost:4000",
+		"https://app-etizer.netlify.com/",
+		"https://app-etizer.herokuapp.com/"
+	]
 };
 
 app.use(cors(corsOptions));
