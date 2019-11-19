@@ -13,9 +13,8 @@ const corsOptions = {
 	origin: [
 		"http://localhost:3000",
 		"http://localhost:4000",
-		"https://app-etizer.netlify.com/",
-		"https://app-etizer.herokuapp.com/",
-		"http://app-etizer.netlify.com/"
+		"https://app-etizer.netlify.com",
+		"https://app-etizer.herokuapp.com"
 	]
 };
 

@@ -7,7 +7,7 @@ if(process.env.NODE_ENV === "development") {
 }
 
 if(process.env.NODE_ENV === "production") {
-	dbURL = process.env.MONGO_URI;
+dbURL = process.env.MONGO_URI;
 }
 
 
